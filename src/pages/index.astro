@@ -6,12 +6,13 @@ import BrandLogo from '../components/BrandLogo.astro';
 import VideoCard from '../components/VideoCard.astro';
 import { band } from '../data/band';
 import InstagramFeed from '../components/InstagramFeed.astro';
+const songs = ['Can’t Stop', 'Wet Sand', 'Californication', 'Dark Necessities', 'Give It Away', 'Dani California', 'Scar Tissue', 'Snow', 'Around the World', 'Otherside', 'Suck My Kiss', 'By the Way', 'Soul to Squeeze', 'Under the Bridge'];
 const asset = (name: string) => `${import.meta.env.BASE_URL}media/${name}.webp`;
 const members = [['Max', 'Gesang'], ['Georg', 'Lead-Gitarre'], ['Krise', 'Gitarre & Backings'], ['Josch', 'Bass'], ['Robert', 'Schlagzeug']];
 ---
 <BaseLayout title="minor kings — Red Hot Chili Peppers Tribute aus Köln" description="Fünf Musiker. Eine gemeinsame Leidenschaft. Erlebt minor kings live — eure Red Hot Chili Peppers Tribute Band aus Köln. Videos, Band und Booking.">
-  <header class="header container">
-    <a class="brand-home" href={import.meta.env.BASE_URL} aria-label="minor kings Startseite"><BrandLogo class="header-logo" decorative /></a>
+  <header class="header header-home container">
+    <a class="wordmark" href={import.meta.env.BASE_URL} aria-label="minor kings Startseite">minor kings</a>
     <nav aria-label="Hauptnavigation"><a href="#band">Die Band</a><a href="#videos">Live & laut</a><a href="#instagram">Backstage</a></nav>
     <a class="button small" href="#booking">Booking <span aria-hidden="true"><Icon name="arrow-up-right" /></span></a>
   </header>
@@ -31,7 +32,9 @@ const members = [['Max', 'Gesang'], ['Georg', 'Lead-Gitarre'], ['Krise', 'Gitarr
       </div>
       <div class="hero-bottom"><span>Funk. Rock. Pure Live-Energie.</span><a href="#band">Mehr entdecken <span aria-hidden="true"><Icon name="arrow-down" /></span></a></div>
     </section>
-    <div class="ticker" aria-hidden="true"><div>CAN’T STOP <span><Icon name="asterisk" /></span> WET SAND <span><Icon name="asterisk" /></span> CALIFORNICATION <span><Icon name="asterisk" /></span> DARK NECESSITIES <span><Icon name="asterisk" /></span> GIVE IT AWAY <span><Icon name="asterisk" /></span></div></div>
+    <div class="ticker" role="region" aria-label="Songs aus unserer Setlist, horizontal scrollbar" tabindex="0">
+      <ul>{songs.map((song, index) => <li>{song}{index < songs.length - 1 && <span aria-hidden="true"><Icon name="asterisk" /></span>}</li>)}</ul>
+    </div>
     <section id="band" class="section container band-section" aria-labelledby="band-title">
       <div class="section-kicker"><span>01 / Die Band</span><span>Von Fans. Für Fans.</span></div>
       <div class="band-grid">

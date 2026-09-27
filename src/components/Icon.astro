@@ -1,0 +1,21 @@
+---
+interface Props {
+  name: 'arrow-up-right' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'play' | 'asterisk' | 'plus' | 'close';
+}
+const { name } = Astro.props;
+const paths = {
+  'arrow-up-right': 'M5 19 19 5M5 5h14v14',
+  'arrow-down-right': 'M5 5 19 19M5 19h14V5',
+  'arrow-down': 'M12 3v18M5 14l7 7 7-7',
+  'arrow-left': 'M21 12H3M10 5l-7 7 7 7',
+  'arrow-right': 'M3 12h18M14 5l7 7-7 7',
+  'asterisk': 'M12 2v20M2 12h20M5 5l14 14M5 19 19 5',
+  'plus': 'M12 4v16M4 12h16',
+  'close': 'M5 5l14 14M5 19 19 5',
+};
+---
+<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+  {name === 'play'
+    ? <path d="M7 4.5 20 12 7 19.5Z" fill="currentColor" />
+    : <path d={paths[name]} stroke="currentColor" stroke-width={name === 'asterisk' ? 3 : 1.8} stroke-linecap="round" stroke-linejoin="round" />}
+</svg>

@@ -56,3 +56,11 @@
 .video-consent{max-width:38ch;font-size:.75rem;line-height:1.5;color:#e2e0dc;text-align:center;text-wrap:pretty}
 .video-consent a{color:var(--gold);white-space:nowrap}
 .video-prompt .video-play:focus-visible,.video-consent a:focus-visible{outline-offset:3px}
+
+/* SVG icons render consistently without platform emoji fonts. */
+.icon{display:inline-block;width:1em;height:1em;vertical-align:-.15em;flex-shrink:0}
+.play-icon{padding-left:0}
+.play-icon .icon{width:1.5rem;height:1.5rem}
+.ticker .icon{width:1.2em;height:1.2em;vertical-align:-.2em}
+.dialog-close,.previous,.next{display:grid;place-items:center}
+.dialog-close .icon,.previous .icon,.next .icon{width:1.25rem;height:1.25rem}

@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 interface Props { id: string; title: string; number: string; subtitle: string; }
 const { id, title, number, subtitle } = Astro.props;
 const poster = `${import.meta.env.BASE_URL}media/${id}.webp`;
@@ -8,14 +9,14 @@ const poster = `${import.meta.env.BASE_URL}media/${id}.webp`;
     <img src={poster} width="480" height="360" alt={`Live-Aufnahme: ${title}`} loading="lazy" />
     <div class="video-prompt">
     <button class="video-play" type="button" aria-describedby={`consent-${id}`} aria-label={`${title}: YouTube-Video laden und abspielen`}>
-      <span class="play-icon" aria-hidden="true">▶</span>
+      <span class="play-icon" aria-hidden="true"><Icon name="play" /></span>
       <span>Video abspielen</span>
     </button>
     <p class="video-consent" id={`consent-${id}`}>Mit dem Abspielen erlaubt ihr YouTube, Daten zu empfangen und Geräteinformationen zu speichern oder auszulesen. <a href={`${import.meta.env.BASE_URL}privacy-policy/#youtube`}>Datenschutz</a></p>
     </div>
   </div>
   <button class="video-revoke" type="button" hidden>YouTube deaktivieren</button>
-  <div class="video-caption"><span class="index">{number}</span><div><h3>{title}</h3><p>{subtitle}</p></div><a href={`https://www.youtube.com/watch?v=${id}`} aria-label={`${title} direkt auf YouTube ansehen`}>↗</a></div>
+  <div class="video-caption"><span class="index">{number}</span><div><h3>{title}</h3><p>{subtitle}</p></div><a href={`https://www.youtube.com/watch?v=${id}`} aria-label={`${title} direkt auf YouTube ansehen`}><Icon name="arrow-up-right" /></a></div>
 </article>
 <script>
   document.querySelectorAll<HTMLElement>('.video-card').forEach((card) => {

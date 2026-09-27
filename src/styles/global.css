@@ -67,6 +67,21 @@
 
 .header-home{min-height:88px}
 .header-home .wordmark{letter-spacing:-.045em}
-.ticker{overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.ticker{overscroll-behavior-x:contain;scrollbar-width:none}
+.ticker::-webkit-scrollbar{display:none}
 .ticker:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
 @media(max-width:680px){.header-home{min-height:0}.ticker>ul{padding-inline:1.25rem;gap:1.5rem}.ticker li{gap:1.5rem}}
+
+/* Confirmed live dates. */
+.shows-section{background:#201014;border-top:1px solid #be163655;border-bottom:1px solid #be163655}
+.shows-section h2 em{color:var(--gold)}
+.shows-list{list-style:none;margin:2.5rem 0 0;padding:0}
+.show-row{display:grid;grid-template-columns:180px minmax(0,1fr) auto;align-items:center;gap:2.5rem;padding:2rem 0;border-block:1px solid var(--line)}
+.show-row+.show-row{border-top:0}
+.show-date{display:flex;flex-direction:column;font-family:Impact,'Arial Narrow',sans-serif;font-size:3.8rem;font-weight:900;line-height:1;letter-spacing:-.025em;color:var(--gold)}
+.show-date span{margin-top:.45rem;font-family:Arial,Helvetica,sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.12em}
+.show-info h3{font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.2;letter-spacing:-.03em}
+.show-info p{color:var(--muted);margin-top:.65rem;font-size:.95rem}
+.show-link{min-height:44px;white-space:nowrap}
+@media(max-width:1000px){.show-row{grid-template-columns:140px minmax(0,1fr);gap:1.5rem}.show-link{grid-column:2}}
+@media(max-width:680px){.show-row{grid-template-columns:1fr;gap:1.3rem;padding-block:1.75rem}.show-link{grid-column:auto;justify-self:start}.show-date{font-size:3.2rem}.show-info p{font-size:.9rem}}

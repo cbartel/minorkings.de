@@ -1,0 +1,10 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import { band } from '../data/band';
+const base = import.meta.env.BASE_URL;
+---
+<footer class="container footer">
+  <a class="brand-home" href={base} aria-label="minor kings Startseite"><BrandLogo class="footer-logo" decorative /></a>
+  <span>Red Hot Chili Peppers Tribute · Köln</span>
+  <div><a href={`${base}impressum/`}>Impressum</a><a href={`${base}privacy-policy/`}>Datenschutz</a><a href={band.instagram}>Instagram ↗</a></div>
+</footer>

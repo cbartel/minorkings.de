@@ -1,0 +1,53 @@
+---
+interface Props { id: string; title: string; number: string; subtitle: string; }
+const { id, title, number, subtitle } = Astro.props;
+const poster = `${import.meta.env.BASE_URL}media/${id}.webp`;
+---
+<article class="video-card">
+  <div class="video-stage" data-video={id} data-title={title}>
+    <img src={poster} width="480" height="360" alt={`Live-Aufnahme: ${title}`} loading="lazy" />
+    <div class="video-prompt">
+    <button class="video-play" type="button" aria-describedby={`consent-${id}`} aria-label={`${title}: YouTube-Video laden und abspielen`}>
+      <span class="play-icon" aria-hidden="true">▶</span>
+      <span>Video abspielen</span>
+    </button>
+    <p class="video-consent" id={`consent-${id}`}>Mit dem Abspielen erlaubt ihr YouTube, Daten zu empfangen und Geräteinformationen zu speichern oder auszulesen. <a href={`${import.meta.env.BASE_URL}privacy-policy/#youtube`}>Datenschutz</a></p>
+    </div>
+  </div>
+  <button class="video-revoke" type="button" hidden>YouTube deaktivieren</button>
+  <div class="video-caption"><span class="index">{number}</span><div><h3>{title}</h3><p>{subtitle}</p></div><a href={`https://www.youtube.com/watch?v=${id}`} aria-label={`${title} direkt auf YouTube ansehen`}>↗</a></div>
+</article>
+<script>
+  document.querySelectorAll<HTMLElement>('.video-card').forEach((card) => {
+    const stage = card.querySelector<HTMLElement>('.video-stage');
+    const play = stage?.querySelector<HTMLButtonElement>('.video-play');
+    const poster = stage?.querySelector('img');
+    const prompt = stage?.querySelector<HTMLElement>('.video-prompt');
+    const revoke = card.querySelector<HTMLButtonElement>('.video-revoke');
+    if (!stage || !play || !poster || !prompt || !revoke) return;
+    const reset = (focus = false) => {
+      stage.querySelector('iframe')?.remove();
+      poster.hidden = false;
+      prompt.hidden = false;
+      revoke.hidden = true;
+      if (focus) play.focus();
+    };
+    play.addEventListener('click', () => {
+      const id = stage.dataset.video;
+      if (!id || !/^[\w-]{11}$/.test(id) || stage.querySelector('iframe')) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = stage.dataset.title || 'minor kings Live-Video';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      poster.hidden = true;
+      prompt.hidden = true;
+      stage.append(iframe);
+      revoke.hidden = false;
+      iframe.focus();
+    });
+    revoke.addEventListener('click', () => reset(true));
+    window.addEventListener('pagehide', () => reset());
+  });
+</script>

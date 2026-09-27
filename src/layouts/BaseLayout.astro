@@ -1,0 +1,22 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <!-- GitHub-Pages-Vorschau: bei Umstellung der eigenen Domain entfernen. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}brand/minor-kings.png`} />
+    <meta name="theme-color" content="#090909" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#inhalt">Zum Inhalt</a>
+    <slot />
+  </body>
+</html>
